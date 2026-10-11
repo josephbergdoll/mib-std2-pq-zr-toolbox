@@ -102,6 +102,36 @@ esac
 - README FAQ links point at these files as the list of supported firmware, so
   keep the train comments accurate.
 
+## Button remaps on offer (`rb_*`)
+
+All patch `/tsd/hmi/HMI/res/configurationmanager.res`; `restore_buttons.sh`
+restores it from backup. A reboot applies the change.
+
+| Script | Menu label | Firmware arms |
+| --- | --- | --- |
+| `rb_setup2app.sh` | SETUP>APP | 3 |
+| `rb_traffic2app.sh` | TRAFFIC>APP | 11 |
+| `rb_info2app.sh` | INFO>APP | 6 |
+| `rb_tp2app.sh` | TP>APP | 2 |
+| `rb_mute2app.sh` | MUTE>APP | 5 |
+| `rb_setup2nav.sh` | SETUP>NAV | 2 |
+| `rb_menu2nav.sh` | MENU>NAV | 1 |
+| `rb_voice2car.sh` | VOICE>CAR | 5 |
+| `rb_voice2app.sh` | VOICE>APP | 2 |
+| `rb_voice2nav.sh` | VOICE>NAV | 4 |
+| `rb_voice2mute.sh` | VOICE>MUTE | 1 |
+
+- Only these pairings exist. Each is two hard-coded bytes written at two
+  per-firmware offsets; there is no general any-button-to-any-function path.
+- To answer "does remap X work on firmware Y", grep the script's `case` arms.
+  The match is on the file's byte size, so the train named in the comment is a
+  label, not the test. An unknown size changes nothing.
+- The repo does not define what the targets (APP, NAV, CAR, MUTE) or sources
+  open. Do not present button behaviour as fact from the repo.
+- Targets are existing hardkey functions only. Soft items such as entries in
+  the Media source list are not remappable this way.
+- The counts above go stale; re-count from the scripts before quoting them.
+
 ## Style
 
 - `#!/bin/ksh` (QNX pdksh). Arrays via `set -A`, hex via `$((16#$i))`. No bash

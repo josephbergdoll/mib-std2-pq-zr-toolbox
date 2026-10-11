@@ -14,6 +14,7 @@ repo itself. Read the note for a directory before changing anything in it:
 | `cpu/.../esd/*.esd` (menu screens) | `.agent-instructions/cpu/onlineservices/1/default/tsd/etc/persistence/esd/README.md` |
 | `cpu/.../esd/scripts/*.sh` | `.agent-instructions/cpu/onlineservices/1/default/tsd/etc/persistence/esd/scripts/README.md` |
 | `custom/`, `dump/`, `backup/` | `.agent-instructions/custom/README.md` (and `dump/`, `backup/`) |
+| Skins, `images.mcf`, reskinning questions | `.agent-instructions/custom/skins/README.md` |
 | `toolbox/` | `.agent-instructions/toolbox/README.md` (plus `gem/`, `devesd/`) |
 | `tools/` | `.agent-instructions/tools/README.md` |
 
@@ -91,12 +92,33 @@ is `olli991/mib-std2-pq-zr-toolbox`. These rules apply to work in the fork.
   for forks, so pass `--repo josephbergdoll/mib-std2-pq-zr-toolbox`. Only target
   `olli991` when explicitly asked.
 
+### Fork-only files must never reach upstream
+
+`r32bitte.md` (the owner's personal unit notes) is tracked in this fork and must
+never appear in `olli991/mib-std2-pq-zr-toolbox`, in a commit, a PR diff, a PR
+or issue body, or a comment. The same goes for the other fork-only files:
+`AGENTS.md`, `CLAUDE.md`, `.agent-instructions/` and
+`.github/pull_request_template.md`.
+
+- Never push to the `upstream` remote. Its push URL is disabled in the owner's
+  clone; do not re-enable it.
+- The fork's `master` contains these files, so a branch cut from it carries them
+  into any upstream PR. If an upstream PR is explicitly requested, create the
+  branch from `upstream/master` and cherry-pick only the relevant commits.
+- Before opening an upstream PR, run
+  `git diff --name-only upstream/master...HEAD` and stop if any fork-only file
+  is listed.
+- Do not quote the contents of `r32bitte.md` (serial number, coding, part
+  numbers) anywhere outside this fork.
+
 ## Known oddities (do not silently "fix")
 
 - `copy_poi.sh` is the only CRLF shell script; its hash in `hashes.txt` matches
   the CRLF bytes.
 - `toolbox/scripts/util_update.sh` differs from the payload `util_update.sh`
   (it lacks the GEM 4.3 → 4.11 upgrade block).
+- `rb_voice2nav.sh` prints "Remapping VOICE to CAR button..." although it remaps
+  VOICE to NAV. Only the message is wrong.
 - The `cpu\onlineservices\1\default\Dir` size and checksum in `metainfo2.txt` do
   not equal the size or SHA-1 of the current `hashes.txt`. What that entry covers
   is not documented in this repo.

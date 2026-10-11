@@ -14,6 +14,7 @@ explaining. The folder tree mirrors the repo: the note for `tools/` is
 │       ├── README.md             Green Engineering Menu screens (.esd)
 │       └── scripts/README.md     on-unit ksh scripts
 ├── custom/README.md              user-supplied files and where they land
+│   └── skins/README.md           what can be reskinned, restore pitfalls
 ├── dump/README.md                on-card dumps written by the unit
 ├── toolbox/README.md             support files used by installer and scripts
 │   ├── devesd/README.md          stock developer GEM screens
