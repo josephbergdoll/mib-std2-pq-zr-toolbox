@@ -119,6 +119,11 @@ or issue body, or a comment. The same goes for the other fork-only files:
   (it lacks the GEM 4.3 → 4.11 upgrade block).
 - `rb_voice2nav.sh` prints "Remapping VOICE to CAR button..." although it remaps
   VOICE to NAV. Only the message is wrong.
+- Skin backup and restore have gaps: `restore_skins.sh` does not restore
+  `info.txt`, a whole-folder skin replace can skip its backup, and
+  `patch_menumode.sh` makes none. Details in
+  `.agent-instructions/custom/skins/README.md`. Never tell a user a skin change
+  is fully reversible through the toolbox.
 - The `cpu\onlineservices\1\default\Dir` size and checksum in `metainfo2.txt` do
   not equal the size or SHA-1 of the current `hashes.txt`. What that entry covers
   is not documented in this repo.
